@@ -12,9 +12,9 @@
     <label for="name"> Name</label>
     <input type="text" placeholder="Yourname" name="name">
     <label for="Password">Password</label>
-    <input type="text" placeholder="Your password" name="password">
+    <input type="password" placeholder="Your password" name="password">
     <label for="Confirm-Password">Confirm Password</label>
-    <input type="text" placeholder="Confirm password" name="confirmPassword">
+    <input type="password" placeholder="Confirm password" name="confirmPassword">
     <a href="#">Login</a>
     <a href="#">Sign Up</a>
     <button name="submit">submit</button>
@@ -24,12 +24,28 @@
 <?php
 
 //class 
+
+if(isset($_POST['submit'])){
+    $name = $_POST['name'];
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirmPassword'];
+
 class User{
 
     //properties
     public $name;
     public $password;
     public $confirmPassword;
+
+    //Constructor
+    function __construct($name,$password,$confirmPassword)
+    {
+        $this->name = $name;
+        $this->password = $password;
+        $this->confirmPassword = $confirmPassword;
+    }
+
+
 
     //method
     function set_name($name){
@@ -60,21 +76,25 @@ class User{
 }
 
  //initiate a user object giving values from outside the class
+ //use this to get the data from the class
+ $user = new user($name,$password,$confirmPassword);
 
- $name = new user();
- $password = new user();
- $confirmPassword = new user();
+ //this 1 is overwiting the form input
+//  $name = new user();
+//  $password = new user();
+//  $confirmPassword = new user();
 
- $name->set_name('name');
- $password->set_password('password');
- $confirmPassword->set_confirmPassword('confirmPassword');
+//  $name->set_name($name);
+//  $password->set_password($password);
+//  $confirmPassword->set_confirmPassword($confirmPassword);
  
- echo $name->get_name();
+ echo $user->get_name();
  echo "<br>";
- echo $password->get_password();
+ echo $user->get_password();
  echo "<br>";
- echo $password->get_confirmPassword();
+ echo $user->get_confirmPassword();
 
+}
 
 ?>
     
