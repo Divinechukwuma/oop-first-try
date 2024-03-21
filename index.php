@@ -36,18 +36,44 @@ class User{
         $this->name = $name;
     }
 
-    function get_password($password){
-        return $this->password = $password;
+    function get_name(){
+        return $this->name;
     }
 
-    function get_confirmPassword($confirmPassword){
-        return $this->confirmPassword = $confirmPassword;
+    function set_password($password){
+        $this->password = $password;
     }
 
-    //initiate a user object giving values from outside the class
+    function get_password(){
+        return $this->password;
+    }
 
+    function set_confirmPassword($confirmPassword){
+        $this->confirmPassword = $confirmPassword;
+    }
+
+    function get_confirmPassword(){
+        return $this->confirmPassword;
+    }
+
+ 
 }
-$user = new user("name","password","confirmPassword");
+
+ //initiate a user object giving values from outside the class
+
+ $name = new user();
+ $password = new user();
+ $confirmPassword = new user();
+
+ $name->set_name('name');
+ $password->set_password('password');
+ $confirmPassword->set_confirmPassword('confirmPassword');
+ 
+ echo $name->get_name();
+ echo "<br>";
+ echo $password->get_password();
+ echo "<br>";
+ echo $password->get_confirmPassword();
 
 
 ?>
