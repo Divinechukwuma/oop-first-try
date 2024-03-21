@@ -1,35 +1,76 @@
 <?php
- session_start();//this will start our session on multiple pages
 
-  //this is a way to write manageable code 
-    //create constants to store non repeating values
-    // define('SITEURL','build/admin/');
-    define('DB_HOST', 'localhost');
-    define('DB_USERNAME', 'divine-store');
-    define('DB_PASSWORD', 'CHUKS989');
-    define('DB_NAME', 'divine-store');
-
-   // Create connection
-$conn = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
-
-// Check connection
-if ($conn->connect_error) {
-  //the die function cut everything off
-  die('Connection failed: ' . $conn->connect_error);
-}
-
-//echo 'Connected successfully';
-
-class database{
+class database
+{
     private $host;
     private $username;
     private $password;
     private $database;
     private $connection;
 
-    
+    //Constructor to initialize database connection parameters
+
+    public function __construct($host, $username, $password, $database)
+    {
+        $this->host = $host;
+        $this->username  = $username;
+        $this->password = $password;
+        $this->database = $database;
+    }
+
+    //Method to establish databases connection
+    public function connect()
+    {
+        $this->connection = new mysqli($this->host, $this->username, $this->password, $this->database);
+
+        //Check connection 
+
+        if ($this->connection->connect_error) {
+            die("connection failed" . $this->connection->connect_error);
+        }
+
+        //echo "connected successfully";
+    }
+
+    //Method to close connection
+    //and the end of the database 
+
+    public function closeConnection(){
+        
+        $this->connection->close();
+
+    }
+
+    //method to execute the query using prepared statement 
+    public function executePreparedStatement($sql,$params){
+        $stmt = $this->connection->prepare($sql);
+
+        //check if statment preparation succeeded 
+        if($stmt == false){
+            die("Error preparing statement:" . $this->connection->error );
+        }
+
+        //Bind params to the prepared statement 
+        if(!empty($params)){
+
+            $types = str_repeat('s',count($params)); //asssuming all the parameters are strings
+            $stmt->bind_param($types, ...$params);
+
+        }
+
+        $stmt->execute();
+
+        //check for errors during execution
+
+        if($stmt->error){
+            die("Error executing statement" . $stmt->error);
+        }
+
+        //close statement
+        $stmt->close();
+
+
+    }
+
 
 }
-
-
-?>

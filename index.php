@@ -24,6 +24,14 @@
 
 <?php
 
+include  "config/data.php";
+
+//usage 
+
+$database = new Database('localhost', 'divine-store', 'CHUKS989', 'divine-store');
+$database->connect();
+
+
 //class 
 
 if(isset($_POST['submit'])){
@@ -31,6 +39,12 @@ if(isset($_POST['submit'])){
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirmPassword'];
 
+    // Check if passwords match
+    if ($password !== $confirmPassword) {
+        echo "Passwords do not match!";
+        exit;
+    }
+    
 class User{
 
     //properties
@@ -77,6 +91,9 @@ class User{
 }
 
  //initiate a user object giving values from outside the class
+ // Generate password hash
+ $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+ $hashedConfirmPassword = password_hash($confirmPassword, PASSWORD_DEFAULT);
  //use this to get the data from the class
  $user = new user($name,$password,$confirmPassword);
 
@@ -89,11 +106,17 @@ class User{
 //  $password->set_password($password);
 //  $confirmPassword->set_confirmPassword($confirmPassword);
  
- echo $user->get_name();
- echo "<br>";
- echo $user->get_password();
- echo "<br>";
- echo $user->get_confirmPassword();
+//  echo $user->get_name();
+//  echo "<br>";
+//  echo $user->get_password();
+//  echo "<br>";
+//  echo $user->get_confirmPassword();
+$sql = "INSERT INTO tbl_signup  (name,password,confirmPassword) Values(?, ?, ?)";
+// Execute prepared statement with parameters
+$database->executePreparedStatement($sql, [$name, $hashedPassword, $hashedConfirmPassword]);
+
+// Close connection
+$database->closeConnection();
 
 }
 
