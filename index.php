@@ -14,7 +14,7 @@
     <label for="Password">Password</label>
     <input type="text" placeholder="Your password" name="password">
     <label for="Confirm-Password">Confirm Password</label>
-    <input type="text" placeholder="Confirm password" name="confirm-password">
+    <input type="text" placeholder="Confirm password" name="confirmPassword">
     <a href="#">Login</a>
     <a href="#">Sign Up</a>
     <button name="submit">submit</button>
@@ -22,6 +22,33 @@
 </form>
 
 <?php
+
+//class 
+class User{
+
+    //properties
+    public $name;
+    public $password;
+    public $confirmPassword;
+
+    //method
+    function set_name($name){
+        $this->name = $name;
+    }
+
+    function get_password($password){
+        return $this->password = $password;
+    }
+
+    function get_confirmPassword($confirmPassword){
+        return $this->confirmPassword = $confirmPassword;
+    }
+
+    //initiate a user object giving values from outside the class
+
+}
+$user = new user("name","password","confirmPassword");
+
 
 ?>
     
