@@ -11,32 +11,38 @@
 <body>
 
     <section>
-        <form action="" method="POST" class="parent">
-            <fieldset>
-                <h1>Sign up </h1>
-                <div class="inputbox">
-                    <ion-icon name="person-circle-outline"></ion-icon>
-                    <label for="name"> Name</label>
-                    <input type="text" placeholder="Yourname" name="name">
-                </div>
-                <div class="inputbox">
-                    <ion-icon name="lock-closed-outline"></ion-icon>
-                    <label for="Password">Password</label>
-                    <input type="password" placeholder="Your password" name="password">
-                </div>
+        <div class="form-box">
+            <div class="form-value">
+                <form action="" method="POST">
 
-                <div class="inputbox">
-                    <ion-icon name="lock-closed-outline"></ion-icon>
-                    <label for="Confirm-Password">Confirm Password</label>
-                    <input type="password" placeholder="Confirm password" name="confirmPassword">
-                </div>
-                <button name="submit">submit</button>
-                <a href="#" class="link">Login</a>
-                <a href="#" class="link">forgot password</a>
+                    <h1>Sign up </h1>
+                    <div class="inputbox">
+                        <ion-icon name="person-circle-outline"></ion-icon>
+                        <label for="name"> Name</label>
+                        <input type="text" placeholder="Yourname" name="name" require>
+                    </div>
+                    <div class="inputbox">
+                        <ion-icon name="lock-closed-outline"></ion-icon>
+                        <label for="Password">Password</label>
+                        <input type="password" placeholder="Your password" name="password" require>
+                    </div>
+
+                    <div class="inputbox">
+                        <ion-icon name="lock-closed-outline"></ion-icon>
+                        <label for="Confirm-Password">Confirm Password</label>
+                        <input type="password" placeholder="Confirm password" name="confirmPassword" require>
+                    </div>
+                    <button name="submit">submit</button>
+                    <div class="link">
+                        <a href="#" class="link">Login</a>
+                        <a href="#" class="link">forgot password</a>
+                    </div> 
 
 
-            </fieldset>
-        </form>
+
+                </form>
+            </div>
+        </div>
     </section>
 
     <?php
